@@ -14,6 +14,7 @@ export const getPackage: RequestHandler = async function (req, res, next) {
   const dependencyTree = {};
   try {
     // review:  move to seperate function - get npm registry
+    // review:  This call can also be cached in memory
     const npmPackage: NPMPackage = await got(
       `https://registry.npmjs.org/${name}`,
     ).json();
@@ -36,6 +37,7 @@ export const getPackage: RequestHandler = async function (req, res, next) {
 };
 
 async function getDependencies(name: string, range: string): Promise<Package> {
+  // review: delete and pass in as a param
   const npmPackage: NPMPackage = await got(
     `https://registry.npmjs.org/${name}`,
   ).json();
