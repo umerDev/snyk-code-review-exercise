@@ -11,6 +11,8 @@ type Package = { version: string; dependencies: Record<string, Package> };
  */
 export const getPackage: RequestHandler = async function (req, res, next) {
   const { name, version } = req.params;
+  // review: check if name and version exist in req params, if not return a bad request response
+
   const dependencyTree = {};
   try {
     // review:  move to seperate function - get npm registry
